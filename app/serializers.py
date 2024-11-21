@@ -26,12 +26,14 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['username', 'password', 'email']
     
     def create(self, validated_data):
-        # Create the user and set the password
-        user = User.objects.create_user(
+        # Create the user
+        user = User(
             username=validated_data['username'],
-            password=validated_data['password'],
             email=validated_data['email']
         )
+        # Explicitly hash the password
+        user.set_password(validated_data['password'])
+        user.save()
         return user
 
 class EnrollmentSerializer(serializers.Serializer):

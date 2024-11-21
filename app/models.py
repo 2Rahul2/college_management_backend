@@ -10,7 +10,7 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         # Check if the password is already hashed
-        if self.password:
+        if self.password and not self.password.startswith('pbkdf2_'):
             self.set_password(self.password)  # Hash the password
         super().save(*args, **kwargs)  
 class Subject(models.Model):
