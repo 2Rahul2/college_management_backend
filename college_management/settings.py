@@ -59,6 +59,7 @@ REST_FRAMEWORK = {
 #     'PAGE_SIZE': 1,  # Number of records per page
 # }
 MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
