@@ -37,7 +37,7 @@ class LogoutView(APIView):
     def post(self, request):
         logout(request)  # Log the user out
         return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
-@method_decorator(csrf_exempt, name='dispatch')
+# @method_decorator(csrf_exempt, name='dispatch')
 class LoginView(APIView):
     permission_classes = [AllowAny]  # Anyone can access this view
 
