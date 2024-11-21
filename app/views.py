@@ -226,8 +226,8 @@ class StudentListView(ListAPIView):
 class RegisterView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         # Save the User instance
