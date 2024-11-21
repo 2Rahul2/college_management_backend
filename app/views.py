@@ -56,6 +56,8 @@ class ReturnRole(APIView):
     permission_classes = [AllowAny]
     def get(self , request):
         user = request.user
+        print(user)
+        print(user.username , user.is_faculty)
         if user.is_faculty:
             return Response({"is_faculty":True})
         return Response({"is_faculty":False})
