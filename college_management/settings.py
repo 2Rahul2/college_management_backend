@@ -92,6 +92,8 @@ CORS_ALLOW_HEADERS = [
     "authorization",
     "x-csrftoken",  # Add this
 ]
+
+CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
 # CSRF Cookie Settings
 CSRF_COOKIE_SECURE = True  # Ensure CSRF cookies are sent over HTTPS
 CSRF_COOKIE_SAMESITE = 'None'  # Allow CSRF cookies in cross-origin requests
