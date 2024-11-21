@@ -44,6 +44,7 @@ class LoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
+        print("LoginView hit with data:", request.data)
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)  # Log the user in
