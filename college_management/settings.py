@@ -70,12 +70,14 @@ AUTH_USER_MODEL = 'app.User'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React frontend
-    "https://sage-sfogliatella-6bd065.netlify.app"
+    "https://sage-sfogliatella-6bd065.netlify.app",
+    "https://college-management-u26p.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "https://sage-sfogliatella-6bd065.netlify.app",
+    "https://college-management-u26p.onrender.com",
 ]
 CORS_ALLOW_METHODS = [
     "GET",
