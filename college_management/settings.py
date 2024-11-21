@@ -106,7 +106,7 @@ ROOT_URLCONF = 'college_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR) ,'staticfiles/build/'],
+        'DIRS': [os.path.join(BASE_DIR) ,'reactapp/build/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -177,7 +177,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles/build/static'),
+    os.path.join(BASE_DIR, 'reactapp/build/static'),
 ]
 
 # Default primary key field type
