@@ -92,6 +92,14 @@ CORS_ALLOW_HEADERS = [
     "authorization",
     "x-csrftoken",  # Add this
 ]
+# CSRF Cookie Settings
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookies are sent over HTTPS
+CSRF_COOKIE_SAMESITE = 'None'  # Allow CSRF cookies in cross-origin requests
+
+# Session Cookie Settings
+SESSION_COOKIE_SECURE = True  # Ensure session cookies are sent over HTTPS
+SESSION_COOKIE_SAMESITE = 'None'  # Allow session cookies in cross-origin requests
+
 ROOT_URLCONF = 'college_management.urls'
 
 TEMPLATES = [
