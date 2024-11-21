@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+# from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .models import Faculty, Student, Subject, StudentSubjectEnrollment ,User ,StudentFaculty
 from .serializers import FacultySerializer, StudentSerializer, SubjectSerializer , SubjectWithFacultiesSerializer , EnrollmentSerializer,StudentSubjectEnrollmentSerializer
 from rest_framework.viewsets import ModelViewSet
@@ -52,8 +52,7 @@ class LoginView(APIView):
         return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
 class ReturnRole(APIView):
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get(self , request):
         user = request.user
         print(user)
@@ -64,6 +63,8 @@ class ReturnRole(APIView):
 
 
 class StudentEnrolledSubjectsView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         student = request.user.student  # Access the logged-in student's instance
         enrollments = StudentSubjectEnrollment.objects.filter(student=student)  # Get all enrollments for the student
@@ -76,6 +77,8 @@ class StudentEnrolledSubjectsView(APIView):
         return Response({"enrollments": serializer.data}, status=status.HTTP_200_OK)
 
 class StudentEnrollmentView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         data = request.data.get('selectedSubjects', [])  # List of enrollments from frontend
 
@@ -106,8 +109,7 @@ class StudentEnrollmentView(APIView):
 
         return Response({"message": "Enrollment successful!"}, status=status.HTTP_201_CREATED)
 class ReturnUserid(APIView):
-    # permission_classes =[IsAuthenticated]
-    permission_classes = [AllowAny]
+    permission_classes =[IsAuthenticated]
 
     def get(self , request):
         user = request.user
@@ -119,12 +121,17 @@ class ReturnUserid(APIView):
             return Response({"user_id":None}) 
 
 class SubjectWithFaculties(APIView):
+    permission_classes = [IsAuthenticated]
+
+
     def get(self , request):
         subjects = Subject.objects.all()
         serialzer = SubjectWithFacultiesSerializer(subjects , many=True)
         return Response({'subjects':serialzer.data} , status=status.HTTP_200_OK)
 class AssignFacultyToStudentView(APIView):
-    permission_classes = [AllowAny]  # Ensure only logged-in users can access this view
+    # permission_classes = [AllowAny]  # Ensure only logged-in users can access this view
+    permission_classes = [IsAuthenticated]
+
 
     def post(self, request):
         try:
@@ -163,8 +170,8 @@ class AssignFacultyToStudentView(APIView):
 class StudentDetailView(RetrieveUpdateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
 
 
     def get_object(self):
@@ -194,7 +201,10 @@ class StudentDetailView(RetrieveUpdateAPIView):
         return super().update(request, *args, **kwargs)
 
 class RowCountView(APIView):
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+
+    
 
     def get(self , request , *args , **kwargs):
         total_count = Student.objects.count()
@@ -208,14 +218,16 @@ class StudentListView(ListAPIView):
     # queryset = User.objects.filter(student__isnull=False) 
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+
     pagination_class = CustomPagination
 
 class RegisterView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         # Save the User instance
@@ -225,11 +237,11 @@ class RegisterView(CreateAPIView):
         Student.objects.create(user=user ,first_name=user.username,last_name="")
 
 
-class MyTokenRefreshView(TokenRefreshView):
-    pass
-# Login API View (Token-based Authentication)
-class MyTokenObtainPairView(TokenObtainPairView):
-    pass
+# class MyTokenRefreshView(TokenRefreshView):
+#     pass
+# # Login API View (Token-based Authentication)
+# class MyTokenObtainPairView(TokenObtainPairView):
+#     pass
 
 # Faculty viewset
 class FacultyViewSet(viewsets.ModelViewSet):
@@ -243,8 +255,8 @@ class FacultyViewSet(viewsets.ModelViewSet):
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
 
 
     def get_queryset(self):
@@ -255,8 +267,8 @@ class StudentViewSet(viewsets.ModelViewSet):
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
 
 
     def get_queryset(self):

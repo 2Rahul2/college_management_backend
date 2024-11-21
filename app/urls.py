@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import FacultyViewSet,StudentEnrollmentView ,Health , StudentEnrolledSubjectsView ,LoginView ,RowCountView ,ReturnUserid , SubjectWithFaculties ,ReturnRole,LogoutView, StudentViewSet,MyTokenRefreshView,SubjectViewSet,AssignFacultyToStudentView, MyTokenObtainPairView ,RegisterView , StudentListView , StudentDetailView
+from .views import FacultyViewSet,StudentEnrollmentView ,Health , StudentEnrolledSubjectsView ,LoginView ,RowCountView ,ReturnUserid , SubjectWithFaculties ,ReturnRole,LogoutView, StudentViewSet,SubjectViewSet,AssignFacultyToStudentView ,RegisterView , StudentListView , StudentDetailView
 
 # router = DefaultRouter()
 # router.register(r'faculties', FacultyViewSet)
@@ -13,7 +13,7 @@ urlpatterns = [
     path('api/logout/', LogoutView.as_view(), name='logout'),
     # path('api/', include(router.urls)),
     path('student-count/' , RowCountView.as_view() ,name="student_count"),
-    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('api/token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'), 
     path('register/', RegisterView.as_view(), name='register'),
     path('students/', StudentListView.as_view(), name='user-list'),
