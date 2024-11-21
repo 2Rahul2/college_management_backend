@@ -73,12 +73,10 @@ MIDDLEWARE = [
 AUTH_USER_MODEL = 'app.User' 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React frontend
     "https://college-management-u26p.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
     "https://college-management-u26p.onrender.com",
 ]
 CORS_ALLOW_METHODS = [
