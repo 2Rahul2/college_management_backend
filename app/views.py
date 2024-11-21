@@ -24,6 +24,14 @@ from django.contrib.auth import authenticate, login, logout
 from .customPermission import IsFaculty
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+
+
+class Health(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request, *args, **kwargs):
+        # Return a 200 OK response with no content
+        return Response(status=status.HTTP_200_OK)
+
 class LogoutView(APIView):
     permission_classes = [AllowAny]
     def post(self, request):

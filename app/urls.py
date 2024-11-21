@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import FacultyViewSet,StudentEnrollmentView , StudentEnrolledSubjectsView ,LoginView ,RowCountView ,ReturnUserid , SubjectWithFaculties ,ReturnRole,LogoutView, StudentViewSet,MyTokenRefreshView,SubjectViewSet,AssignFacultyToStudentView, MyTokenObtainPairView ,RegisterView , StudentListView , StudentDetailView
+from .views import FacultyViewSet,StudentEnrollmentView ,Health , StudentEnrolledSubjectsView ,LoginView ,RowCountView ,ReturnUserid , SubjectWithFaculties ,ReturnRole,LogoutView, StudentViewSet,MyTokenRefreshView,SubjectViewSet,AssignFacultyToStudentView, MyTokenObtainPairView ,RegisterView , StudentListView , StudentDetailView
 
 # router = DefaultRouter()
 # router.register(r'faculties', FacultyViewSet)
@@ -8,6 +8,7 @@ from .views import FacultyViewSet,StudentEnrollmentView , StudentEnrolledSubject
 # router.register(r'subjects', SubjectViewSet)
 
 urlpatterns = [
+    path('health/' , Health.as_view()),
      path('api/login/', LoginView.as_view(), name='login'),
     path('api/logout/', LogoutView.as_view(), name='logout'),
     # path('api/', include(router.urls)),
