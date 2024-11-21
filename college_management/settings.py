@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["college-management-backend-3eww.onrender.com"]
+ALLOWED_HOSTS = ["college-management-backend-3eww.onrender.com" ,"localhost"]
 
 
 # Application definition
@@ -70,12 +70,12 @@ AUTH_USER_MODEL = 'app.User'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React frontend
-    "https://sage-sfogliatella-6bd065.netlify.app/"
+    "https://sage-sfogliatella-6bd065.netlify.app"
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
-    "https://sage-sfogliatella-6bd065.netlify.app/",
+    "https://sage-sfogliatella-6bd065.netlify.app",
 ]
 CORS_ALLOW_METHODS = [
     "GET",
