@@ -4,24 +4,15 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
 
 
-class CustomUserManager(BaseUserManager):
-    def create_user(self, username, password=None, **extra_fields):
-        if not username:
-            raise ValueError("The Username field must be set")
-        user = self.model(username=username, **extra_fields)
-        user.set_password(password)  # Ensure the password is hashed
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, username, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        return self.create_user(username, password, **extra_fields)
 
 class User(AbstractUser):
     is_faculty = models.BooleanField(default=False)
 
-    objects = CustomUserManager()  
+    def save(self, *args, **kwargs):
+        # Check if the password is already hashed
+        if self.password:
+            self.set_password(self.password)  # Hash the password
+        super().save(*args, **kwargs)  
 class Subject(models.Model):
     name = models.CharField(max_length=100)
     # faculties = models.ManyToManyField(Faculty, through='SubjectFaculty')
