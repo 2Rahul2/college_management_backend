@@ -26,8 +26,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 from django.shortcuts import render
-# def index(request):
-#     return render(request , "index.html")
+def index(request):
+    return render(request , "index.html")
 class Health(APIView):
     permission_classes = [AllowAny]
     def get(self, request, *args, **kwargs):
