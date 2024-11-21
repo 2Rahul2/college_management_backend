@@ -52,7 +52,8 @@ class LoginView(APIView):
         return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
 class ReturnRole(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def get(self , request):
         user = request.user
         if user.is_faculty:
@@ -103,7 +104,9 @@ class StudentEnrollmentView(APIView):
 
         return Response({"message": "Enrollment successful!"}, status=status.HTTP_201_CREATED)
 class ReturnUserid(APIView):
-    permission_classes =[IsAuthenticated]
+    # permission_classes =[IsAuthenticated]
+    permission_classes = [AllowAny]
+
     def get(self , request):
         user = request.user
         print(user)
@@ -158,7 +161,9 @@ class AssignFacultyToStudentView(APIView):
 class StudentDetailView(RetrieveUpdateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+
 
     def get_object(self):
         student = super().get_object()  # Get the student object based on the studentId passed in the URL
@@ -187,6 +192,8 @@ class StudentDetailView(RetrieveUpdateAPIView):
         return super().update(request, *args, **kwargs)
 
 class RowCountView(APIView):
+    permission_classes = [AllowAny]
+
     def get(self , request , *args , **kwargs):
         total_count = Student.objects.count()
         return Response({"total_count":total_count})
@@ -205,7 +212,9 @@ class StudentListView(ListAPIView):
 class RegisterView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+
     def perform_create(self, serializer):
         # Save the User instance
         user = serializer.save()
@@ -224,13 +233,17 @@ class MyTokenObtainPairView(TokenObtainPairView):
 class FacultyViewSet(viewsets.ModelViewSet):
     queryset = Faculty.objects.all()
     serializer_class = FacultySerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+
 
 # Student viewset
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+
 
     def get_queryset(self):
         user = self.request.user
@@ -240,7 +253,9 @@ class StudentViewSet(viewsets.ModelViewSet):
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+
 
     def get_queryset(self):
         user = self.request.user
