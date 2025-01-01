@@ -189,6 +189,10 @@ class StudentDetailView(RetrieveUpdateAPIView):
         #  get the student object based on the studentId passed in the URL(student id)
         student = super().get_object()  
         user = self.request.user
+
+
+        print(f"Logged-in user: {user}")
+        print(f"Student's user: {student.user}")
         # faculty can view any student's details
         if Faculty.objects.filter(user=user).exists():
             return student
@@ -198,7 +202,7 @@ class StudentDetailView(RetrieveUpdateAPIView):
             return student
         else:
             print("not allowed")
-            Response({"error": f"An error occurred:"}, status=status.HTTP_302_FOUND)
+            Response({"error": "An error occurred:"}, status=status.HTTP_302_FOUND)
 
     def update(self, request, *args, **kwargs):
         student = self.get_object()  
